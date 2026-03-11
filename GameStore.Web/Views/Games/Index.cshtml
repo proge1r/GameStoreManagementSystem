@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GameStore.Web.Data.Entities.Game>
+
+<h2>Games List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <form asp-action="InlineAdd" method="post">
+            <td>
+                <input name="Name" class="form-control" placeholder="New game name" required />
+            </td>
+            <td>
+                <input name="Price" type="number" step="0.01" class="form-control" placeholder="0.00" required />
+            </td>
+            <td>
+                <select name="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </td>
+            </form>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.Category?.Name</td>
+                <td>
+                    <a asp-action="BulkEdit" class="btn btn-sm btn-outline-secondary">Edit All</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

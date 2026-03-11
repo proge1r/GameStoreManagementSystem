@@ -1,0 +1,30 @@
+﻿@model GameStore.Web.Models.GameBulkEditViewModel
+
+<h2>Bulk Edit Games</h2>
+
+<form asp-action="BulkUpdate" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Games.Count; i++)
+            {
+                <tr>
+                    <input type="hidden" asp-for="Games[i].Id" />
+                    <td>
+                        <input asp-for="Games[i].Name" class="form-control" />
+                    </td>
+                    <td>
+                        <input asp-for="Games[i].Price" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">Save All Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
